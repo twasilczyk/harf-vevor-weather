@@ -1,0 +1,47 @@
+# Standalone schema-checkable diagnostic example, NOT an OpenHARF pin map.
+# Replace all pins/board/network settings for your hardware. No TX is configured.
+esphome:
+  name: generic-fsk-receiver
+  on_boot:
+    priority: -100
+    then:
+      - cc1101.begin_rx: radio
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+api:
+wifi:
+  ssid: "replace-with-your-network"
+  password: "replace-with-your-password"
+
+spi:
+  clk_pin: GPIO18
+  miso_pin: GPIO19
+  mosi_pin: GPIO23
+
+cc1101:
+  id: radio
+  cs_pin: GPIO21
+  frequency: 915MHz
+  modulation_type: 2-FSK
+  symbol_rate: 11260
+  fsk_deviation: 38kHz
+  filter_bandwidth: 203kHz
+
+remote_receiver:
+  id: fsk_timings
+  pin: GPIO27  # Physically wire CC1101 GDO2 here.
+  filter: 65us
+  idle: 2000us
+  receive_symbols: 512
+
+radio_frequency:
+  - platform: ir_rf_proxy
+    id: fsk_receiver
+    name: "915 MHz FSK timing receiver"
+    remote_receiver_id: fsk_timings
+    frequency: 915MHz  # Discovery metadata ONLY; cc1101 above tunes the radio.

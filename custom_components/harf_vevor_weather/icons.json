@@ -1,0 +1,9 @@
+{
+  "entity": {
+    "sensor": {
+      "wind_direction": {"default": "mdi:compass-outline"},
+      "uv_index": {"default": "mdi:sun-wireless-outline"},
+      "health": {"default": "mdi:radio-tower"}
+    }
+  }
+}

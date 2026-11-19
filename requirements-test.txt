@@ -1,0 +1,7 @@
+# Minimum supported HA; the native receiver adapter is also tested locally on
+# HA 2026.12.0.dev0 (see docs/VALIDATION.md). Python >=3.14.2.
+homeassistant==2026.9.2
+pytest-homeassistant-custom-component==0.13.365
+rf-protocols==4.3.0
+aioesphomeapi==46.2.0
+ruff==0.17.3

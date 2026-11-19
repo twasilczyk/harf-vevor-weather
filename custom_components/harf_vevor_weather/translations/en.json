@@ -1,0 +1,129 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Select an RF receiver",
+        "description": "Choose one receiver already tuned for your station\u2019s 2-FSK signal. The Home Assistant modulation label does not tune the radio.",
+        "data": {
+          "receiver": "RF receiver"
+        }
+      },
+      "no_receiver": {
+        "title": "No usable receiver",
+        "description": "Connect an ESPHome RF receive channel or native RF receiver. Confirm receive capability and raw timing forwarding, then submit to retry."
+      },
+      "method": {
+        "title": "Identify your station",
+        "description": "Discovery listens to the station's regular broadcasts. No pairing or button press is required, and nothing is sent to the station.",
+        "menu_options": {
+          "discover": "Discover station",
+          "manual": "Enter station ID manually"
+        }
+      },
+      "discover": {
+        "title": "Discovering a station"
+      },
+      "retry": {
+        "title": "Station not confirmed",
+        "description": "No verified packet arrived within 75 seconds, the receiver disconnected, or you declined the station. Check receiver tuning and timing capture.",
+        "menu_options": {
+          "discover": "Listen again",
+          "manual": "Enter station ID manually",
+          "user": "Choose another receiver"
+        }
+      },
+      "manual": {
+        "title": "Enter your station ID",
+        "description": "Enter 0x followed by four hexadecimal digits, or a decimal number. The verified weather format uses channel 0. Manual setup can proceed while the station is silent; measurements remain unavailable until received.",
+        "data": {
+          "sensor_id": "Station ID"
+        }
+      },
+      "confirm": {
+        "title": "Confirm station {sensor_id}",
+        "description": "Station {sensor_id}, channel {channel}. Confirm this is your station, not a neighbor\u2019s. If unsure, verify its ID using a capture or controlled power cycle before proceeding.",
+        "data": {
+          "confirm": "This is my station"
+        }
+      },
+      "reconfigure": {
+        "title": "Replace receiver or station ID",
+        "description": "Use after a receiver replacement or station battery change. Existing entities and history are preserved. New station IDs start a new rain baseline without adding historical rain.",
+        "data": {
+          "receiver": "RF receiver",
+          "sensor_id": "Station ID"
+        }
+      }
+    },
+    "progress": {
+      "listening": "Listening for up to 75 seconds. A station normally transmits about every 20 seconds."
+    },
+    "error": {
+      "receiver_unusable": "Select a connected receiver with receive capability.",
+      "invalid_sensor_id": "Enter a 16-bit ID such as 0x7203 or 29187.",
+      "already_configured": "This station ID and channel are already configured."
+    },
+    "abort": {
+      "already_configured": "This station is already configured.",
+      "reconfigure_successful": "Station configuration updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Signal freshness",
+        "data": {
+          "signal_timeout": "Lost signal timeout (seconds)"
+        },
+        "data_description": {
+          "signal_timeout": "60\u2013600 seconds. Default: 90 seconds, allowing several missed 20-second transmissions."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "temperature": {
+        "name": "Temperature"
+      },
+      "humidity": {
+        "name": "Relative humidity"
+      },
+      "wind_speed": {
+        "name": "Average wind speed"
+      },
+      "wind_gust": {
+        "name": "Wind gust"
+      },
+      "wind_direction": {
+        "name": "Wind direction"
+      },
+      "rain_mm": {
+        "name": "Cumulative rainfall"
+      },
+      "uv_index": {
+        "name": "UV index"
+      },
+      "illuminance": {
+        "name": "Illuminance"
+      },
+      "last_seen": {
+        "name": "Last successful packet"
+      },
+      "health": {
+        "name": "Reception status",
+        "state": {
+          "waiting": "Waiting for a packet",
+          "receiving": "Receiving",
+          "receiver_disconnected": "Receiver disconnected",
+          "signal_lost": "No recent valid packet"
+        }
+      }
+    },
+    "binary_sensor": {
+      "battery_low": {
+        "name": "Battery low"
+      }
+    }
+  }
+}
